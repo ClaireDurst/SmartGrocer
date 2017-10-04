@@ -3,10 +3,11 @@ import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
+import Google from "../components/Google";
 
 const About = () =>
   <div>
-    
+    <Google/>
     <Hero backgroundImage="https://ak5.picdn.net/shutterstock/videos/13723595/thumb/4.jpg">
       <h1>SmartGrocer</h1>
       <h2>Meal Planning Done Right</h2>
@@ -19,15 +20,7 @@ const About = () =>
       </Row>
       <Row>
         <Col size="md-12">
-          <p>
-            LLL
-          </p>
-          <p>
-           aaaaa
-          </p>
-          <p>
-            dvsdsdf
-          </p>
+          
         </Col>
       </Row>
       <Row>

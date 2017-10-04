@@ -1,13 +1,23 @@
 import React from "react";
 import "./SearchResults.css";
 
-const SearchResults = props =>
-  <ul className="list-group search-results">
-    {props.results.map(result =>
-      <li key={result} className="list-group-item">
-        <img alt="Dog" src={result} className="img-responsive" />
-      </li>
-    )}
-  </ul>;
 
-export default SearchResults;
+class Recipe extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			
+		}
+	}
+
+	render() {
+		return(
+			<div>
+			<h1> recipe page</h1>
+		</div>
+		)
+	}
+}
+
+
+export default Recipe;
