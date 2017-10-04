@@ -1,58 +1,72 @@
 import React, { Component } from "react";
-import API from "../utils/API";
+import { DropdownButton, MenuItem, Col, Thumbnail, Button, Grid } from 'react-bootstrap';
+import axios from 'axios';
+//import API from "../utils/API";
+
+
 
 class Discover extends Component {
-  state = {
-    image: "",
-    match: false,
-    matchCount: 0
-  };
+  constructor() {
+    super();
+    this.state = {
+      recipe_image: "",
+      link: "",
+      recipes: []
+    };
+  }
 
   // When the component mounts, load the next dog to be displayed
   componentDidMount() {
-    this.loadNextDog();
+//    this.loadRecipe();
   }
 
-  handleBtnClick = event => {
-    // Get the data-value of the clicked button
-    const btnType = event.target.attributes.getNamedItem("data-value").value;
-    // Clone this.state to the newState object
-    // We'll modify this object and use it to set our component's state
-    const newState = { ...this.state };
+  
 
-    if (btnType === "pick") {
-      // Set newState.match to either true or false depending on whether or not the dog likes us (1/5 chance)
-      newState.match = 1 === Math.floor(Math.random() * 5) + 1;
-
-      // Set newState.matchCount equal to its current value or its current value + 1 depending on whether the dog likes us
-      newState.matchCount = newState.match
-        ? newState.matchCount + 1
-        : newState.matchCount;
-    } else {
-      // If we thumbs down'ed the dog, we haven't matched with it
-      newState.match = false;
-    }
-    // Replace our component's state with newState, load the next dog image
-    this.setState(newState);
-    this.loadNextDog();
+  loadRecipe = (recipe, index) => {
+    return <Col xs={6} md={4} key={index}>
+      <Thumbnail src={recipe.image_url} alt="242x200" width="200px" height="200px">
+        <h3>{recipe.title}</h3>
+        <p>
+          <Button href="'/recipes/'+recipe.recipe_id" bsStyle="primary">Add Ingredients</Button>&nbsp;
+        </p>
+      </Thumbnail>
+    </Col>   
   };
 
-  loadNextDog = () => {
-    API.getRandomDog()
-      .then(res =>
-        this.setState({
-          image: res.data.message
-        })
-      )
-      .catch(err => console.log(err));
+  getSelected = (eventKey, event) => {
+    axios.post('http://localhost:3000/api/recipes', {recipe: eventKey})
+    .then(res => this.setState({recipes: res.data}))
+    .catch(err => console.log('err occured', err));
   };
+
+
 
   render() {
+    const recipes = this.state.recipes;
+    const recipeMap = recipes ? recipes.map((recipe, index) => this.loadRecipe(recipe, index)) : [];
     return (
-      <div>
-        <h1 className="text-center">Make New Friends</h1>
+      <div className="container">
+        <div>
+
+    <DropdownButton title='Select Recipe' id={`recipe-dropdown`} onSelect={this.getSelected.bind(this)}>
+      <MenuItem eventKey="vegan">Vegan</MenuItem>
+      <MenuItem eventKey="vegetarian">Vegetarian</MenuItem>
+      <MenuItem eventKey="chicken">Chicken</MenuItem>
+      <MenuItem eventKey="beef">Beef</MenuItem>
+      <MenuItem eventKey="pork">Pork</MenuItem>
+    </DropdownButton>
+
+        </div>
+        <h1 className="text-center">Recipes</h1>
+
+
+  <Grid>
+{recipeMap}
+  </Grid>
+     
+
         <h3 className="text-center">
-          Thumbs up on any pups you'd like to meet!
+          Add a recipe to your meal plan
         </h3>
         <h1 className="text-center">
           Made friends with {this.state.matchCount} pups so far!

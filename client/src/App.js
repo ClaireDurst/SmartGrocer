@@ -6,6 +6,7 @@ import Plan from "./pages/Plan";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
+import SearchResults from "./components/SearchResults";
 
 const App = () =>
   <Router>
@@ -15,6 +16,7 @@ const App = () =>
         <Route exact path="/" component={Home} />
         <Route exact path="/Home" component={Home} />
         <Route exact path="/Recipes" component={Recipes} />
+        <Route exact path="/recipes/:id" component={SearchResults} />
         <Route exact path="/Plan" component={Plan} />
       </Wrapper>
       <Footer />
