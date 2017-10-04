@@ -5,28 +5,28 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 
 const About = () =>
-  <div>
-    
-    <Hero backgroundImage="https://ak5.picdn.net/shutterstock/videos/13723595/thumb/4.jpg">
+
+   <div>
+      <Container style={{ minHeight: "80%" }}>
+       <Hero backgroundImage="https://ak5.picdn.net/shutterstock/videos/13723595/thumb/4.jpg">
       <h1>SmartGrocer</h1>
       <h2>Meal Planning Done Right</h2>
     </Hero>
-    <Container style={{ marginTop: 30 }}>
-      <Row>
+        <h1 className="text-center">Welcome to SmartGrocer!</h1>
+        <Row>
         <Col size="md-12">
-          <h1>Welcome To SmartGrocer!</h1>
         </Col>
       </Row>
       <Row>
         <Col size="md-12">
-          <p>
+          <p className="text-center">
             LLL
           </p>
-          <p>
+          <p className="text-center">
            aaaaa
           </p>
-          <p>
-            dvsdsdf
+          <p className="text-center">
+            Modal
           </p>
         </Col>
       </Row>
@@ -34,7 +34,9 @@ const About = () =>
       <Col size="md-12">
       </Col>
       </Row>
-    </Container>
-  </div>;
-
+      </Container>
+  </div>
+ 
 export default About;
+
+   
